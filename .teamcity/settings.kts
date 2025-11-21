@@ -36,6 +36,13 @@ project {
 object Build : BuildType({
     name = "Build"
 
+    requirements {
+        equals("teamcity.agent.jvm.os.name", "Mac OS X")
+
+        // or slightly more tolerant:
+        // startsWith("teamcity.agent.jvm.os.name", "Mac")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
