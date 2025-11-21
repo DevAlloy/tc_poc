@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
@@ -40,11 +41,15 @@ object Build : BuildType({
     }
 
     steps {
-        gradle {
-            id = "gradle_runner"
-            tasks = "clean build"
-            gradleWrapperPath = ""
+        script {
+            name = "xcode build"
+            scriptContent = "xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -destination 'generic/platform=iOS Simulator'"
         }
+//        gradle {
+//            id = "gradle_runner"
+//            tasks = "clean build"
+//            gradleWrapperPath = ""
+//        }
     }
 
     triggers {
